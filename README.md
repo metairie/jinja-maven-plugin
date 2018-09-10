@@ -13,7 +13,7 @@ In your project file do:
       <plugin>
         <groupId>de.wintercloud</groupId>
         <artifactId>jinja-maven-plugin</artifactId>
-        <version>1.0</version>
+        <version>1.0.1-SNAPSHOT</version>
         <configuration>
           <outputFile>path-to-outout.txt</outputFile>
           <templateFile>path-to-template.jinja</templateFile>

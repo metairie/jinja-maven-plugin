@@ -16,16 +16,12 @@ package de.wintercloud;
  * limitations under the License.
  */
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
-
 import com.hubspot.jinjava.Jinjava;
 import org.apache.commons.io.FileUtils;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -36,36 +32,34 @@ import java.util.Map;
 /**
  * Goal which renders a jinja file
  */
-@Mojo( name = "renderjinja" )
+@Mojo(name = "renderjinja")
 public class CompileJinjaMojo
-    extends AbstractMojo
-{
+        extends AbstractMojo {
     /**
      * Location of the file.
      */
-    @Parameter( property = "templatefile", required = true )
+    @Parameter(property = "templatefile", required = true)
     private File templateFile;
-    @Parameter( property = "variablesfile", required = true )
+    @Parameter(property = "variablesfile", required = true)
     private File varFile;
-    @Parameter( property = "outputfile", required = true )
+    @Parameter(property = "outputfile", required = true)
     private File outputFile;
 
     public void execute()
-        throws MojoExecutionException
-    {
+            throws MojoExecutionException {
         try {
             // Load the parameters
             Yaml yaml = new Yaml();
-            Map<String, Object> context = (Map<String, Object>) yaml.load(FileUtils.readFileToString(varFile,(Charset)null));
+            Map<String, Object> context = yaml.load(FileUtils.readFileToString(varFile, (Charset) null));
 
             // Load template
             Jinjava jinjava = new Jinjava();
-            String template = FileUtils.readFileToString(templateFile,(Charset)null);
+            String template = FileUtils.readFileToString(templateFile, (Charset) null);
 
             // Render and save
             String rendered = jinjava.render(template, context);
-            FileUtils.writeStringToFile(outputFile, rendered, (Charset)null);
-        } catch(IOException e) {
+            FileUtils.writeStringToFile(outputFile, rendered, (Charset) null);
+        } catch (IOException e) {
             // Print error and exit with -1
             throw new MojoExecutionException(e.getLocalizedMessage(), e);
         }
