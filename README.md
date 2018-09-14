@@ -4,6 +4,8 @@ This project combines [jinjava](https://github.com/HubSpot/jinjava) and [snakeya
 
 ## Usage
 
+Notice: Original plugin de.wintercloud:jinja-maven-plugin
+
 In your project file do:
 
 ```
@@ -11,7 +13,7 @@ In your project file do:
   <build>
     <plugins>
       <plugin>
-        <groupId>de.wintercloud</groupId>
+        <groupId>ch.ebu</groupId>
         <artifactId>jinja-maven-plugin</artifactId>
         <version>1.0.1-SNAPSHOT</version>
         <configuration>
@@ -37,9 +39,9 @@ or make it part of your compile phase:
   <build>
     <plugins>
       <plugin>
-        <groupId>de.wintercloud</groupId>
+        <groupId>ch.ebu</groupId>
         <artifactId>jinja-maven-plugin</artifactId>
-        <version>1.0</version>
+        <version>1.0.1-SNAPSHOT</version>
         <executions>
           <execution>
             <phase>compile</phase>

@@ -1,4 +1,6 @@
-package de.wintercloud;
+package ch.ebu.maven.plugin;
+
+// Notice: original plugin de.wintercloud:jinja-maven-plugin
 
 /*
  * Copyright 2001-2005 The Apache Software Foundation.
@@ -33,8 +35,7 @@ import java.util.Map;
  * Goal which renders a jinja file
  */
 @Mojo(name = "renderjinja")
-public class CompileJinjaMojo
-        extends AbstractMojo {
+public class CompileJinjaMojo extends AbstractMojo {
     /**
      * Location of the file.
      */
