@@ -24,11 +24,14 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.eclipse.sisu.Parameters;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,6 +48,9 @@ public class CompileJinjaMojo extends AbstractMojo {
     private File varFile;
     @Parameter(property = "outputfile", required = true)
     private File outputFile;
+
+    @Parameter(property = "k8files")
+    private List k8Files;
 
     public void execute()
             throws MojoExecutionException {
