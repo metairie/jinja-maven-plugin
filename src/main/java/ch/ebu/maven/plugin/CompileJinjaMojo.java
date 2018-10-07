@@ -32,27 +32,66 @@ import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
- * Goal which renders a jinja file
+ * Goal which renders jinja files
  */
-@Mojo(name = "renderjinja")
+@Mojo(name = "render")
 public class CompileJinjaMojo extends AbstractMojo {
     /**
-     * Location of the file.
+     * Location of the files.
      */
-    @Parameter(property = "templatefile", required = true)
-    private File templateFile;
+
+    // variables
     @Parameter(property = "variablesfile", required = true)
-    private File varFile;
-    @Parameter(property = "outputfile", required = true)
-    private File outputFile;
+    private File variablesfile;
 
-    public void execute()
-            throws MojoExecutionException {
+    // spring template/output
+    @Parameter(property = "springtemplatefile", required = true)
+    private File springtemplatefile;
+
+    @Parameter(property = "springoutputfile", required = true)
+    private File springoutputfile;
+
+    // k8 template/output
+    @Parameter(property = "k8templatefile", required = true)
+    private File k8templatefile;
+
+    @Parameter(property = "k8outputfile", required = true)
+    private File k8outputfile;
+
+    public void execute() throws MojoExecutionException {
+        // load parameters
+        Map<String, Object> context = loadParameter(variablesfile);
+        // render spring
+        render(springtemplatefile, springoutputfile, context);
+        // render k8
+        render(k8templatefile, k8outputfile, context);
+    }
+
+    /**
+     * Common Parameters loader
+     *
+     * @return
+     * @throws MojoExecutionException
+     */
+    private Map<String, Object> loadParameter(File variableFile) throws MojoExecutionException {
+        // Load the parameters
         try {
-            // Load the parameters
-            Yaml yaml = new Yaml();
-            Map<String, Object> context = yaml.load(FileUtils.readFileToString(varFile, (Charset) null));
+            return new Yaml().load(FileUtils.readFileToString(variableFile, (Charset) null));
+        } catch (IOException e) {
+            // Print error and exit with -1
+            throw new MojoExecutionException(e.getLocalizedMessage(), e);
+        }
+    }
 
+    /**
+     * Templace Rendering
+     *
+     * @param templateFile
+     * @param outputFile
+     * @throws MojoExecutionException
+     */
+    private void render(File templateFile, File outputFile, Map<String, Object> context) throws MojoExecutionException {
+        try {
             // Load template
             Jinjava jinjava = new Jinjava();
             String template = FileUtils.readFileToString(templateFile, (Charset) null);
@@ -60,6 +99,7 @@ public class CompileJinjaMojo extends AbstractMojo {
             // Render and save
             String rendered = jinjava.render(template, context);
             FileUtils.writeStringToFile(outputFile, rendered, (Charset) null);
+
         } catch (IOException e) {
             // Print error and exit with -1
             throw new MojoExecutionException(e.getLocalizedMessage(), e);

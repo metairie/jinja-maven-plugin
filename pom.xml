@@ -1,162 +1,177 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>ch.ebu.maven.plugin</groupId>
-  <artifactId>jinja-maven-plugin</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
-  <packaging>maven-plugin</packaging>
-  <description>Jinjava plugin for Maven</description>
-  <name>jinja-maven-plugin Maven Plugin</name>
-  <url>https://github.com/metairie/jinja-maven-plugin</url>
+    <groupId>ch.ebu.maven.plugin</groupId>
+    <artifactId>jinja-maven-plugin</artifactId>
+    <version>1.0.3-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
+    <description>Jinjava plugin for Maven</description>
+    <name>jinja-maven-plugin Maven Plugin</name>
+    <url>https://github.com/metairie/jinja-maven-plugin</url>
 
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-  <developers>
-    <developer>
-      <name>Stephane Metairie</name>
-      <email>metairie@ebu.ch</email>
-      <organization>ch.ebu.metairie</organization>
-      <organizationUrl>www.ebu.ch</organizationUrl>
-    </developer>
-  </developers>
+    <developers>
+        <developer>
+            <name>Stephane Metairie</name>
+            <email>metairie@ebu.ch</email>
+            <organization>ch.ebu.metairie</organization>
+            <organizationUrl>www.ebu.ch</organizationUrl>
+        </developer>
+    </developers>
 
-  <scm>
-    <connection>scm:git:git://github.com/ebu/opentools.git</connection>
-    <developerConnection>scm:ssh://github.com:ebu/opentools.git</developerConnection>
-    <url>https://github.com/ebu/opentools</url>
-  </scm>
+    <scm>
+        <connection>scm:git:git://github.com/ebu/opentools.git</connection>
+        <developerConnection>scm:ssh://github.com:ebu/opentools.git</developerConnection>
+        <url>https://github.com/ebu/opentools</url>
+    </scm>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-      <!--            <url>https://oss.sonatype.org/content/repositories/releases/</url>-->
-    </repository>
-  </distributionManagement>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <!--            <url>https://oss.sonatype.org/content/repositories/releases/</url>-->
+        </repository>
+    </distributionManagement>
 
-  <!-- Configuration has been prepared, now you can:
+    <!-- Configuration has been prepared, now you can:
 
-  export JAVA_HOME=/opt/jdk1.8.0_181
-  export JRE_HOME=/opt/jdk1.8.0_181/jre
-  export PATH=$PATH:/opt/jdk1.8.0_181/bin:/opt/jdk1.8.0_181/jre/bin
-  mvn clean deploy UNDER LINUX ONLY (gpg)
+  * build UNDER LINUX ONLY (gpg)
+    export JAVA_HOME=/opt/jdk1.8.0_181
+    export JRE_HOME=/opt/jdk1.8.0_181/jre
+    export PATH=$PATH:/opt/jdk1.8.0_181/bin:/opt/jdk1.8.0_181/jre/bin
+    mvn clean deploy
 
-* Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
-* Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2
-* Promote staged artifacts into repository 'Releases'
-* Download snapshot and release artifacts from group https://oss.sonatype.org/content/groups/public
-* Download snapshot, release and staged artifacts from staging group https://oss.sonatype.org/content/groups/staging
+  * Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
+  * Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2
+  * Promote staged artifacts into repository 'Releases'
+  * Download snapshot and release artifacts from group https://oss.sonatype.org/content/groups/public
+  * Download snapshot, release and staged artifacts from staging group https://oss.sonatype.org/content/groups/staging
 
-please comment on this ticket when you promoted your first release, thanks
--->
+  please comment on this ticket when you promoted your first release, thanks
+  -->
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <commons-io.version>2.6</commons-io.version>
-    <jinjava.version>2.4.8</jinjava.version>
-    <snakeyaml.version>1.23</snakeyaml.version>
-    <!-- plugin version -->
-    <plugin-gpg.version>1.6</plugin-gpg.version>
-    <plugin-nexus-staging.version>1.6.8</plugin-nexus-staging.version>
-    <plugin.maven-plugin-annotations.version>3.5.2</plugin.maven-plugin-annotations.version>
-    <plugin.maven-plugin-api.version>3.5.4</plugin.maven-plugin-api.version>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <commons-io.version>2.6</commons-io.version>
+        <jinjava.version>2.4.8</jinjava.version>
+        <snakeyaml.version>1.23</snakeyaml.version>
+        <!-- plugin version -->
+        <plugin-gpg.version>1.6</plugin-gpg.version>
+        <plugin-nexus-staging.version>1.6.8</plugin-nexus-staging.version>
+        <plugin.maven-plugin-annotations.version>3.5.2</plugin.maven-plugin-annotations.version>
+        <plugin.maven-plugin-api.version>3.5.4</plugin.maven-plugin-api.version>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-plugin-api</artifactId>
-      <version>${plugin.maven-plugin-api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugin-tools</groupId>
-      <artifactId>maven-plugin-annotations</artifactId>
-      <version>${plugin.maven-plugin-annotations.version}</version>
-      <scope>provided</scope>
-    </dependency>
-      <dependency>
-        <groupId>org.yaml</groupId>
-        <artifactId>snakeyaml</artifactId>
-        <version>${snakeyaml.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.hubspot.jinjava</groupId>
-        <artifactId>jinjava</artifactId>
-        <version>${jinjava.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>${commons-io.version}</version>
-      </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${plugin.maven-plugin-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${plugin.maven-plugin-annotations.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hubspot.jinjava</groupId>
+            <artifactId>jinjava</artifactId>
+            <version>${jinjava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
-      <!-- deployment -->
-      <!-- GPG plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>${plugin-gpg.version}</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- sonatype repo -->
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>${plugin-nexus-staging.version}</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <!-- Set this to true and the release will automatically proceed and sync to Central Repository will follow  -->
-          <autoReleaseAfterClose>false</autoReleaseAfterClose>
-        </configuration>
-      </plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <goalPrefix>jinja</goalPrefix>
+                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>mojo-descriptor</id>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>help-goal</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-plugin-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <goalPrefix>jinja</goalPrefix>
-          <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
-        </configuration>
-        <executions>
-          <execution>
-            <id>mojo-descriptor</id>
-            <goals>
-              <goal>descriptor</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>help-goal</id>
-            <goals>
-              <goal>helpmojo</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- deployment -->
+                    <!-- GPG plugin -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${plugin-gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- sonatype repo -->
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${plugin-nexus-staging.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <!-- Set this to true and the release will automatically proceed and sync to Central Repository will follow  -->
+                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
 </project>
